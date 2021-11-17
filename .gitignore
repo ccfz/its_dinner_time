@@ -38,3 +38,7 @@ yarn-debug.log*
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.env
+schema/*
+spec/examples.txt
+coverage/
