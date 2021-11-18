@@ -22,5 +22,4 @@ ActiveRecord::Schema.define(version: 2021_11_17_195107) do
     t.jsonb "ingredients", default: "[]", null: false
     t.string "name"
   end
-
 end

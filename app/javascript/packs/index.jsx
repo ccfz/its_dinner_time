@@ -1,10 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
-import App from "../components/App";
+import Recipes from "../components/Recipes";
 
 document.addEventListener("DOMContentLoaded", () => {
   render(
-    <App />,
+    <Recipes />,
     document.body.appendChild(document.createElement("div"))
   );
 });
