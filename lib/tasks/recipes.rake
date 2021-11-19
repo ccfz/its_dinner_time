@@ -8,7 +8,17 @@ namespace :recipes do
 
     ActiveRecord::Base.transaction do
       recipes.each do |recipe|
-        Recipe.create!(name: recipe['name'], ingredients: recipe['ingredients'])
+        Recipe.create!(
+          name: recipe['name'],
+          steps: recipe['steps'],
+          image: recipe['image'],
+          prep_time: recipe['prep_time'],
+          total_time: recipe['total_time'],
+          author: recipe['author'],
+          people_quantity: recipe['people_quantity'],
+          cook_time: recipe['cook_time'],
+          ingredients: recipe['ingredients']
+        )
       end
     end
   end

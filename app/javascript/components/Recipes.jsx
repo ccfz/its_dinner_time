@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useRecipeFetch from '../hooks/useRecipeFetch';
 const Recipes = () => {
-  const [recipes] = useRecipeFetch();
+  const [recipes, queryRecipes] = useRecipeFetch();
+  const [value, setValue] = useState('')
+
+  function handleChange(e) {
+    setValue(e.target.value)
+    queryRecipes({ ingredients: e.target.value })
+  }
 
   return (
     <div>
       <h1>ITS DINNER TIME</h1>
-      <input placeholder="Tomato, Chicken, Pasta" />
+      <input
+        value={value}
+        onChange={handleChange}
+        aria-label="ingredients-input"
+        placeholder="Tomato, Chicken, Pasta"
+      />
       <table>
         <tbody>
           {recipes.map(recipe => {

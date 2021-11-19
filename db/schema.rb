@@ -19,7 +19,15 @@ ActiveRecord::Schema.define(version: 2021_11_17_195107) do
   create_table "recipes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.jsonb "ingredients", default: "[]", null: false
     t.string "name"
+    t.string "steps"
+    t.string "image"
+    t.string "prep_time"
+    t.string "total_time"
+    t.string "author"
+    t.string "people_quantity"
+    t.string "cook_time"
+    t.jsonb "ingredients"
   end
+
 end

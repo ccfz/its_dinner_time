@@ -3,11 +3,14 @@ import axios from 'axios';
 
 
 const useRecipeFetch = () => {
-  const  [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  async function fetchRecipes() {
+  async function fetchRecipes(query) {
     const { data } = await axios.get(
-      process.env.REACT_APP_BACKEND_API_URL + 'recipes/index'
+      process.env.REACT_APP_BACKEND_API_URL + 'recipes/index',
+      {
+        params: query
+      }
     );
 
     setRecipes(data || []);
@@ -16,7 +19,7 @@ const useRecipeFetch = () => {
     fetchRecipes();
   }, []);
 
-  return [recipes];
+  return [recipes, fetchRecipes];
 };
 
 export default useRecipeFetch

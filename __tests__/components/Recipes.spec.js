@@ -37,6 +37,20 @@ describe('Recipes', () => {
     expect(screen.getByText('Chicken, Onions')).toBeTruthy();
     expect(screen.getByText('Beef stew')).toBeTruthy();
     expect(screen.getByText('Beef, Red wine')).toBeTruthy();
-
   });
+
+  describe('when ingredients are entered in the query', () => {
+    it('queries recipes with the entered value', () => {
+      const mockQueryRecipes = jest.fn();
+      useRecipeFetch.mockReturnValueOnce([
+        [],
+        mockQueryRecipes
+      ])
+      const utils = render(<Recipes />);
+      const input = utils.getByLabelText('ingredients-input')
+      fireEvent.change(input, {target: {value: 'Tomato'}})
+      expect(input.value).toBe('Tomato');
+      expect(mockQueryRecipes).toHaveBeenCalledWith('Tomato')
+    })
+  })
 })
