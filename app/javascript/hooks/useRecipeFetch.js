@@ -8,6 +8,7 @@ const useRecipeFetch = () => {
     debounce(fetchRecipes, 300, { leading: false, trailing: true })
   );
   async function fetchRecipes(query) {
+    console.log(process.env.REACT_APP_BACKEND_API_URL)
     const { data } = await axios.get(
       process.env.REACT_APP_BACKEND_API_URL + 'recipes/index',
       {
