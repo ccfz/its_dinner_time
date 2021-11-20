@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-
+import debounce from 'lodash/debounce';
 
 const useRecipeFetch = () => {
   const [recipes, setRecipes] = useState([]);
-
+  const debouncedFetchRecipes = useRef(
+    debounce(fetchRecipes, 300, { leading: false, trailing: true })
+  );
   async function fetchRecipes(query) {
     const { data } = await axios.get(
       process.env.REACT_APP_BACKEND_API_URL + 'recipes/index',
@@ -19,7 +21,7 @@ const useRecipeFetch = () => {
     fetchRecipes();
   }, []);
 
-  return [recipes, fetchRecipes];
+  return [recipes, debouncedFetchRecipes.current];
 };
 
 export default useRecipeFetch
