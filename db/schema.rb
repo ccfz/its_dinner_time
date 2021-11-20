@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_195107) do
+ActiveRecord::Schema.define(version: 2021_11_20_000621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_195107) do
     t.string "people_quantity"
     t.string "cook_time"
     t.jsonb "ingredients"
+    t.index "to_tsvector('french'::regconfig, ingredients)", name: "index_recipes_on_to_tsvector_french_ingredients", using: :gin
   end
 
 end
