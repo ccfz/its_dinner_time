@@ -22,21 +22,35 @@ describe('Recipes', () => {
     ).toBeTruthy();
   });
 
-  it('renders any received recipes with their title and ingredients', () => {
+  it('renders any received recipes with their title, ingredients'
+    + 'prep time, cook time, quantity and author', () => {
     useRecipeFetch.mockReturnValueOnce([
       [
-        { id: 1, name: 'Chicken stew', ingredients: ['Chicken', 'Onions'] },
-        { id: 2, name: 'Beef stew', ingredients: ['Beef', 'Red wine'] }
+        {
+          id: 1,
+          name: 'Chicken stew',
+          ingredients: ['Chicken', 'Onions'],
+          author: 'Gandalf',
+          prep_time: '60',
+          cook_time: '40',
+          people_quantity: '4',
+          image: 'www.chicken_picture.com'
+        }
       ],
       jest.fn()
     ])
 
     render(<Recipes />);
 
+
     expect(screen.getByText('Chicken stew')).toBeTruthy();
     expect(screen.getByText('Chicken, Onions')).toBeTruthy();
-    expect(screen.getByText('Beef stew')).toBeTruthy();
-    expect(screen.getByText('Beef, Red wine')).toBeTruthy();
+    expect(screen.getByText('Author: Gandalf')).toBeTruthy();
+    expect(screen.getByText('Prep time: 60')).toBeTruthy();
+    expect(screen.getByText('Cook time: 40')).toBeTruthy();
+    expect(screen.getByText('Portions: 4')).toBeTruthy();
+    const recipeImg = screen.getByRole('img');
+    expect(recipeImg).toHaveAttribute('src', 'www.chicken_picture.com');
   });
 
   describe('when ingredients are entered in the query', () => {
@@ -50,7 +64,7 @@ describe('Recipes', () => {
       const input = utils.getByLabelText('ingredients-input')
       fireEvent.change(input, {target: {value: 'Tomato'}})
       expect(input.value).toBe('Tomato');
-      expect(mockQueryRecipes).toHaveBeenCalledWith('Tomato')
+      expect(mockQueryRecipes).toHaveBeenCalledWith({ ingredients: "Tomato" })
     })
   })
 })
