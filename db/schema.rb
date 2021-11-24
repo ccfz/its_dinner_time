@@ -30,5 +30,4 @@ ActiveRecord::Schema.define(version: 2021_11_20_000621) do
     t.jsonb "ingredients"
     t.index "to_tsvector('french'::regconfig, ingredients)", name: "index_recipes_on_to_tsvector_french_ingredients", using: :gin
   end
-
 end
